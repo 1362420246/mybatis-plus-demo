@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 /**
- * 多数据源
+ * 多数据源 @DS 注解
  */
 public interface UserDynamicMapper {
 
