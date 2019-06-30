@@ -1,0 +1,33 @@
+## 多主多从                      纯粹多库（记得设置primary）                   混合配置
+#spring:                               spring:                               spring:
+#  datasource:                           datasource:                           datasource:
+#    dynamic:                              dynamic:                              dynamic:
+#      datasource:                           datasource:                           datasource:
+#        master_1:                             mysql:                                master:
+#        master_2:                             oracle:                               slave_1:
+#        slave_1:                              sqlserver:                            slave_2:
+#        slave_2:                              postgresql:                           oracle_1:
+#        slave_3:                              h2:                                   oracle_2:
+
+#以下会配置一个默认库master，一个组slave下有两个子库slave_1,slave_2
+spring:
+  datasource:
+    dynamic:
+      primary: master #设置默认的数据源或者数据源组,默认值即为master
+      datasource:
+        master:
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://127.0.0.1:3306/mybatis-plus-demo?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
+        slave_1:
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://127.0.0.1:3306/mybatis-plus-1?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
+        slave_2:
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://127.0.0.1:3306/mybatis-plus-2?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
+
