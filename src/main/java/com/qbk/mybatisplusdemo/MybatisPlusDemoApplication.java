@@ -17,7 +17,8 @@ import org.springframework.web.client.RestTemplate;
  * DruidDataSourceAutoConfigure会注入一个DataSourceWrapper，其会在原生的spring.datasource下找url,username,password等。
  * 而我们动态数据源的配置路径是变化的。
  */
-@SpringBootApplication(exclude = DruidDataSourceAutoConfigure.class)
+//@SpringBootApplication(exclude = DruidDataSourceAutoConfigure.class)
+@SpringBootApplication()
 /**
  * 在 Spring Boot 启动类中添加 @MapperScan 注解，扫描 Mapper 文件夹：
  */

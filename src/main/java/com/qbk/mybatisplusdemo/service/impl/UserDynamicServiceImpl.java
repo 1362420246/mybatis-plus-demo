@@ -20,7 +20,7 @@ import java.util.Map;
  * @DS("dsName") ：	dsName可以为组名也可以为具体某个库的名称
  */
 @Service
-@DS("slave")
+//@DS("slave")
 public class UserDynamicServiceImpl implements UserDynamicService {
 
     @Autowired
@@ -80,7 +80,7 @@ public class UserDynamicServiceImpl implements UserDynamicService {
     }
 
     @Override
-    @DS("slave_1")
+//    @DS("slave_1")
     public List<Map<String, Object>> selectByCondition() {
         return jdbcTemplate.queryForList("select * from user where age >10");
     }

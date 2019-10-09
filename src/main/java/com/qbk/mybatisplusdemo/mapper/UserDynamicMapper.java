@@ -21,6 +21,6 @@ public interface UserDynamicMapper {
     boolean deleteUser(@Param("id") Integer id);
 
     @Select("SELECT * FROM user")
-    @DS("slave_1")
+//    @DS("slave_1")
     List<User> selectAll();
 }

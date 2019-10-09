@@ -41,6 +41,13 @@ public class MybatisPlusDemoApplicationTests {
     }
 
     @Test
+    public void testInset() {
+        User user = User.builder().name("qbk").age(29).email("11@qq.com").build();
+        int insert = userMapper.insert(user);
+        Assert.assertEquals(1,insert);
+    }
+
+    @Test
     public void testSelectApi() {
         //headers
         HttpHeaders requestHeaders = new HttpHeaders();

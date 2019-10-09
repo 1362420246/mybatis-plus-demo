@@ -4,7 +4,7 @@ spring:
     druid:
       url: jdbc:mysql://127.0.0.1:3306/mybatis-plus-demo?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
       username: root
-      password: 123456
+      password: root
       driver-class-name: com.mysql.cj.jdbc.Driver
       initial-size: 5
       minIdle: 5
@@ -16,3 +16,19 @@ spring:
       minEvictableIdleTimeMillis: 30000
 
 
+mybatis-plus:
+  mapper-locations: classpath:/*Mapper.xml
+  type-aliases-package: com.qbk.mybatisplusdemo.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 驼峰下划线转换
+    map-underscore-to-camel-case: true
+    # 配置的缓存的全局开关
+    cache-enabled: true
+    # 延时加载的开关
+    lazy-loading-enabled: true
+    # 开启的话，延时加载一个属性时会加载该对象全部属性，否则按需加载属性
+    multiple-result-sets-enabled: true
+    use-generated-keys: true
+    default-statement-timeout: 60
+    default-fetch-size: 100
