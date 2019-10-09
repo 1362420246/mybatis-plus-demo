@@ -1,5 +1,6 @@
 package com.qbk.mybatisplusdemo;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -10,6 +11,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qbk.mybatisplusdemo.entity.User;
 import com.qbk.mybatisplusdemo.mapper.UserMapper;
 import com.sun.org.apache.xerces.internal.util.EntityResolverWrapper;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 import org.junit.Test;
@@ -194,14 +196,18 @@ public class QueryWrapperTests {
     public void selectPage() {
         Page<User> page = new Page<>(3, 2);
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-
+        //排序
+        queryWrapper.orderByDesc("age","name");
+        //分页
         IPage<User> userIPage = mapper.selectPage(page, queryWrapper);
         long current = userIPage.getCurrent();
         long size = userIPage.getSize();
         long pages = userIPage.getPages();
         long total = userIPage.getTotal();
+        // 分页记录列表
         List<User> records = userIPage.getRecords();
         System.out.println(userIPage);
+        System.out.println(JSONObject.toJSONString(userIPage));
         System.out.println("当前页数 ------> " +current);
         System.out.println("当前每页显示数 ------> " + size);
         System.out.println("总页数 ------> " + pages);
@@ -209,7 +215,6 @@ public class QueryWrapperTests {
         System.out.println(records);
 
     }
-
 
     /**
      * <p>
@@ -223,9 +228,16 @@ public class QueryWrapperTests {
     public void selectMapsPage() {
         Page<User> page = new Page<>(1, 5);
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-
+        //排序
+        queryWrapper.orderByDesc("age","name");
+        //分页
         IPage<Map<String, Object>> mapIPage = mapper.selectMapsPage(page, queryWrapper);
-        System.out.println(mapIPage);
+        System.out.println( ToStringBuilder.reflectionToString(mapIPage) );
+        System.out.println(JSONObject.toJSONString(mapIPage));
+        // 分页记录列表
+        List<Map<String, Object>> records = mapIPage.getRecords();
+        System.out.println(records);
+        System.out.println(JSONObject.toJSONString(records));
     }
 
 

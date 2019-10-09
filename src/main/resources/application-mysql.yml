@@ -20,7 +20,7 @@ mybatis-plus:
   mapper-locations: classpath:/*Mapper.xml
   type-aliases-package: com.qbk.mybatisplusdemo.entity
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     # 驼峰下划线转换
     map-underscore-to-camel-case: true
     # 配置的缓存的全局开关
