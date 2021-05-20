@@ -1,7 +1,5 @@
 package com.qbk.mybatisplusdemo.service;
 
-import com.baomidou.dynamic.datasource.annotation.DS;
-
 import java.util.List;
 import java.util.Map;
 
@@ -10,9 +8,11 @@ import java.util.Map;
  */
 public interface UserDynamicService {
 
-    public int insert ();
+    int insert ();
 
-    public List<Map<String, Object>> selectAll();
+    int insert2 ();
 
-    public List<Map<String, Object>> selectByCondition();
+    List<Map<String, Object>> selectAll();
+
+    List<Map<String, Object>> selectByCondition();
 }

@@ -5,6 +5,7 @@ import com.qbk.mybatisplusdemo.service.UserDynamicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -68,10 +69,18 @@ public class UserDynamicServiceImpl implements UserDynamicService {
      */
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int insert() {
-        //TODO 需要在数据库自行配置主从数据同步
-        return jdbcTemplate.update("insert into user (id,name,age) values(?,?,?)",
-                99,"qbk",29);
+        //需要在数据库自行配置主从数据同步
+        return jdbcTemplate.update("insert into user (name,age) values(?,?)", "qbk1",29);
+    }
+
+    @Override
+    @DS("slave_1")
+    @Transactional(rollbackFor = Exception.class)
+    public int insert2() {
+        //需要在数据库自行配置主从数据同步
+        return jdbcTemplate.update("insert into user (name,age) values(?,?)", "qbk2",31);
     }
 
     @Override
@@ -80,8 +89,8 @@ public class UserDynamicServiceImpl implements UserDynamicService {
     }
 
     @Override
-//    @DS("slave_1")
+    @DS("slave_1")
     public List<Map<String, Object>> selectByCondition() {
-        return jdbcTemplate.queryForList("select * from user where age >10");
+        return jdbcTemplate.queryForList("select * from user");
     }
 }

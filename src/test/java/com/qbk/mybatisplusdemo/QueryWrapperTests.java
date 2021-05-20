@@ -1,29 +1,18 @@
 package com.qbk.mybatisplusdemo;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qbk.mybatisplusdemo.entity.User;
 import com.qbk.mybatisplusdemo.mapper.UserMapper;
-import com.sun.org.apache.xerces.internal.util.EntityResolverWrapper;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.session.RowBounds;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.jsf.el.WebApplicationContextFacesELResolver;
-
-import javax.naming.Name;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -226,7 +215,7 @@ public class QueryWrapperTests {
      */
     @Test
     public void selectMapsPage() {
-        Page<User> page = new Page<>(1, 5);
+        IPage page = new Page<>(1, 5);
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         //排序
         queryWrapper.orderByDesc("age","name");

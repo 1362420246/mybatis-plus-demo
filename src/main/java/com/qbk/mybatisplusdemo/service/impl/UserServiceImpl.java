@@ -1,7 +1,5 @@
 package com.qbk.mybatisplusdemo.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.additional.query.ChainQuery;
-import com.baomidou.mybatisplus.extension.service.additional.update.ChainUpdate;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.qbk.mybatisplusdemo.entity.User;
 import com.qbk.mybatisplusdemo.mapper.UserMapper;
@@ -10,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 /**
  *   继承ServiceImpl类后 ，即可获得CRUD功能
- *   https://blog.csdn.net/m0_37034294/article/details/82908527
  */
 /**
  * IService 接口方法说明

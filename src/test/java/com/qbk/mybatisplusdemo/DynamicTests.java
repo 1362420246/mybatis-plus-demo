@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -35,13 +36,28 @@ public class DynamicTests {
         System.out.println(inset);
     }
 
+    /**
+     * 多数据源  切换数据源 不支持spring原生事务
+     *
+     * 同一个方法内部切换数据源，那么方法上的事务就会失效
+     */
     @Test
-    public void dynamicMybatisTest(){
-        boolean kk = userDynamicMapper.addUser(20, "kk", 29);
-        System.out.println(kk);
-        List<User> users = userDynamicMapper.selectAll();
-        System.out.println(users);
+    @Transactional(rollbackFor = Exception.class)
+    public void dynamicTransactionalTest(){
+        int insert = userDynamicService.insert();
+        int insert2 = userDynamicService.insert2();
+        System.out.println(insert);
+        System.out.println(insert2);
     }
 
-
+    /**
+     * 多数据源 切换数据源 只能在切换后添加事务 才支持spring事务
+     */
+    @Test
+    public void dynamicTransactionalTest2(){
+        int insert = userDynamicService.insert();
+        int insert2 = userDynamicService.insert2();
+        System.out.println(insert);
+        System.out.println(insert2);
+    }
 }

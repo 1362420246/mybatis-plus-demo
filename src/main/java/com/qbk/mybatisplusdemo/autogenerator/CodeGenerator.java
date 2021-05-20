@@ -19,8 +19,6 @@ import java.util.Scanner;
  *  代码生成器：
  *  自动生成 controller 、service、mapper 代码
  *
- *  https://mp.baomidou.com/guide/generator.html
- *  https://blog.csdn.net/m0_37034294/article/details/82902373
  *  演示例子，执行 main 方法控制台输入模块表名回车自动生成对应项目目录中
  */
 public class CodeGenerator {
@@ -37,7 +35,7 @@ public class CodeGenerator {
         System.out.println(help.toString());
         if (scanner.hasNext()) {
             String ipt = scanner.next();
-            if (StringUtils.isNotEmpty(ipt)) {
+            if (StringUtils.isNotBlank(ipt)) {
                 return ipt;
             }
         }
