@@ -72,15 +72,35 @@ public class UserDynamicServiceImpl implements UserDynamicService {
     @Transactional(rollbackFor = Exception.class)
     public int insert() {
         //需要在数据库自行配置主从数据同步
-        return jdbcTemplate.update("insert into user (name,age) values(?,?)", "qbk1",29);
+        int result = jdbcTemplate.update("insert into user (name,age) values(?,?)", "qbk1", 29);
+//        int a = 10/0;
+        return result;
     }
 
     @Override
-    @DS("slave_1")
+    @DS("slave")
     @Transactional(rollbackFor = Exception.class)
     public int insert2() {
         //需要在数据库自行配置主从数据同步
-        return jdbcTemplate.update("insert into user (name,age) values(?,?)", "qbk2",31);
+        int result = jdbcTemplate.update("insert into user (name,age) values(?,?)", "qbk2", 31);
+//        int a = 10/0;
+        return result;
+    }
+
+    @Override
+    @DS("master")
+    public int insert3() {
+        int result = jdbcTemplate.update("insert into user (name,age) values(?,?)", "qbk3", 29);
+//        int a = 10/0;
+        return result;
+    }
+
+    @Override
+    @DS("slave")
+    public int insert4() {
+        int result = jdbcTemplate.update("insert into user (name,age) values(?,?)", "qbk4", 31);
+//        int a = 10/0;
+        return result;
     }
 
     @Override
@@ -89,7 +109,7 @@ public class UserDynamicServiceImpl implements UserDynamicService {
     }
 
     @Override
-    @DS("slave_1")
+    @DS("slave")
     public List<Map<String, Object>> selectByCondition() {
         return jdbcTemplate.queryForList("select * from user");
     }
