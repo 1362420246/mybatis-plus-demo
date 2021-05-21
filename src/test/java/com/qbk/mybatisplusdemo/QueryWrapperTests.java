@@ -18,7 +18,6 @@ import java.util.Map;
 
 /**
  * 条件构造器 测试 （带分页插件）
- * https://blog.csdn.net/m0_37034294/article/details/82917234
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -254,6 +253,5 @@ public class QueryWrapperTests {
 
         System.out.println(update);
     }
-
 
 }
