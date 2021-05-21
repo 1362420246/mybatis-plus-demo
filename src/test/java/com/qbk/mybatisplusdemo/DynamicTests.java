@@ -1,7 +1,5 @@
 package com.qbk.mybatisplusdemo;
 
-import com.qbk.mybatisplusdemo.TransactionManage.TransactionSupport;
-import com.qbk.mybatisplusdemo.entity.User;
 import com.qbk.mybatisplusdemo.mapper.UserDynamicMapper;
 import com.qbk.mybatisplusdemo.service.UserDynamicService;
 import com.qbk.mybatisplusdemo.service.UserTxService;
@@ -10,7 +8,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -31,6 +28,9 @@ public class DynamicTests {
     @Autowired
     private UserTxService userTxService;
 
+    /**
+     * 测试数据源切换
+     */
     @Test
     public void dynamicTest(){
         List<Map<String, Object>> maps = userDynamicService.selectAll();
@@ -44,17 +44,13 @@ public class DynamicTests {
     /**
      * 多数据源 切换数据源 不支持spring原生事务
      *
-     * 同一个方法内部切换数据源，那么方法上的事务就会失效
+     * 同一个方法内部切换数据源，那么该方法上的事务就会导致 @DS 失效
      *
-     * 如果同一个事务内切换数据源，则所有操作失效
+     * 如果同一个事务内切换数据源，则切换数据源就失效
      */
     @Test
-    @Transactional(rollbackFor = Exception.class)
     public void dynamicTransactionalTest(){
-        int insert = userDynamicService.insert3();
-        int insert2 = userDynamicService.insert4();
-        System.out.println(insert);
-        System.out.println(insert2);
+        userTxService.insertSpringTx();
     }
 
     /**
@@ -69,9 +65,7 @@ public class DynamicTests {
     }
 
     /**
-     * 多数据源 切换数据源 使用aop自定义控制事务
-     *
-     *  TODO 不管用，控制不了  DynamicRoutingDataSource
+     * 多数据源 切换数据源 使用 @DSTransactional 控制事务
      */
     @Test
     public void dynamicTransactionalTest3(){
